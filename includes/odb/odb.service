@@ -1,0 +1,17 @@
+[Unit]
+Description=Oracle Database Autostart
+After=syslog.target network.target
+
+[Service]
+LimitMEMLOCK=infinity
+LimitNOFILE=65536
+
+Type=simple
+RemainAfterExit=yes
+User=oracle
+Group=oinstall
+ExecStart=/etc/odb-start.sh >> /home/oracle/odbstart.log 2>&1
+ExecStop=/etc/odb-stop.sh >> /home/oracle/odbstop.log 2>&1
+
+[Install]
+WantedBy=multi-user.target
